@@ -1,0 +1,55 @@
+<script>
+  export let isOpen = false
+</script>
+
+<nav class:isOpen>
+  <h1>Logo</h1>
+  <ul on:click on:keypress>
+    <li>Home</li>
+    <li>About</li>
+    <li>Blog</li>
+    <li>Services</li>
+    <li>Contact</li>
+  </ul>
+</nav>
+
+<style>
+  h1 {
+    margin-right: auto;
+  }
+  nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    padding-inline: 0;
+  }
+  li {
+    cursor: pointer;
+  }
+  li:hover {
+    color: #f27121;
+  }
+  @media screen and (max-width: 600px) {
+    nav {
+      flex-direction: column;
+      gap: 3rem;
+    }
+    ul {
+      display: none;
+    }
+    .isOpen ul {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .isOpen li {
+      padding-bottom: 1rem;
+      border-bottom: 2px solid white;
+    }
+  }
+</style>
