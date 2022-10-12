@@ -1,15 +1,31 @@
 <script>
+  import BackToTop from './BackToTop.svelte'
+
   const date = new Date().getFullYear()
+
+  const handleBackToTop = () => {
+    scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    })
+  }
 </script>
 
 <footer>
   <div>
     <p>Copyright © {date} Tom Foolery. All rights reserved.</p>
   </div>
+  <!-- <div>
+    <BackToTop --color="rgba(255, 255, 255, 0.8)" on:click={handleBackToTop} />
+  </div> -->
 </footer>
 
 <style>
   footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-block: 2rem;
     background-color: var(--background, var(--black));
     color: var(--color, var(--white));

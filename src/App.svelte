@@ -2,8 +2,8 @@
   import { tick } from 'svelte'
   import { posts, index, error, lastScrollY } from './store'
 
-  import Header from './Header.svelte'
-  import Footer from './Footer.svelte'
+  import Header from './Header/Header.svelte'
+  import Footer from './Footer/Footer.svelte'
   import Spinner from './Spinner.svelte'
   import Card from './Card.svelte'
   import Error from './Error.svelte'
@@ -26,7 +26,7 @@
   $: isShowAll = $index == undefined
 </script>
 
-<Header --background="var(--black)" --color="white" --width="1100px" />
+<Header --background="var(--black)" --color="rgba(255, 255, 255, 0.8)" --width="1100px" />
 
 <div>
   <main>
@@ -48,7 +48,7 @@
   <Error --color="white" />
 {/if}
 
-<Footer --background="var(--black)" --color="white" --width="1100px" />
+<Footer --background="var(--black)" --color="rgba(255, 255, 255, 0.8)" --width="1100px" />
 
 <style>
   :global(:root) {
@@ -61,6 +61,7 @@
   :global(*) {
     box-sizing: border-box;
     margin: 0;
+    padding: 0;
   }
   :global(body) {
     display: grid;
@@ -82,7 +83,7 @@
   }
   @media screen and (max-width: 600px) {
     main {
-      padding-inline: 2rem;
+      padding: 3rem;
     }
   }
 </style>
