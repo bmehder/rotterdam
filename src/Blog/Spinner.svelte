@@ -1,14 +1,14 @@
 <script>
-	import { error } from './store'
+  import { error } from './store'
 </script>
 
 {#if !$error}
-	<div class="lds-ring">
-		<div />
-		<div />
-		<div />
-		<div />
-	</div>
+  <div class="lds-ring">
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
 {/if}
 
 <style>

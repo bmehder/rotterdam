@@ -22,7 +22,6 @@
 
 <style>
   header {
-    height: 100%;
     padding-block: 2rem;
     background-color: var(--background, var(--black));
     color: var(--color);
