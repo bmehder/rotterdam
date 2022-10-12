@@ -102,4 +102,10 @@
   article :global(figure) {
     margin: 0;
   }
+  @media screen and (max-width: 400px) {
+    article {
+      padding-block: 2rem;
+      padding-inline: 1rem;
+    }
+  }
 </style>
