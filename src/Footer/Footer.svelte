@@ -15,22 +15,21 @@
 <footer>
   <div>
     <p>Copyright © {date} Tom Foolery. All rights reserved.</p>
-  </div>
-  <!-- <div>
+
     <BackToTop --color="rgba(255, 255, 255, 0.8)" on:click={handleBackToTop} />
-  </div> -->
+  </div>
 </footer>
 
 <style>
   footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-block: 2rem;
     background-color: var(--background, var(--black));
     color: var(--color, var(--white));
   }
   div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 2rem;
     max-width: var(--width, 100%);
     margin-inline: auto;
     padding-inline: 3rem;
