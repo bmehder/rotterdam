@@ -83,7 +83,7 @@
   }
   @media screen and (max-width: 600px) {
     main {
-      padding: 1rem;
+      padding: 2rem;
     }
   }
 </style>
