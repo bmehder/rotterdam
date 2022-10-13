@@ -39,7 +39,7 @@
     cursor: pointer;
   }
   li:hover {
-    color: #f27121;
+    text-decoration: underline;
   }
   li.active {
     color: var(--light);
