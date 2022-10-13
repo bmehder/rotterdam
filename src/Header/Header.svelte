@@ -2,7 +2,6 @@
   import Nav from './Nav.svelte'
   import Hamburger from './Hamburger.svelte'
 
-  const pages = ['Home', 'About', 'Blog', 'Services', 'Contact']
   const BREAKPOINT = 600
 
   let innerWidth
@@ -19,7 +18,7 @@
 
 <header class:isOpen>
   <div>
-    <Nav {pages} {isOpen} on:click={closeNav} />
+    <Nav bind:isOpen on:click={closeNav} />
     <Hamburger {isOpen} on:click={toggleNav} />
   </div>
 </header>

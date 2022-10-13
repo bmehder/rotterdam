@@ -1,13 +1,21 @@
 <script>
-  export let pages = []
+  import { pages, pageNumber } from './pages'
+
   export let isOpen = false
+
+  export const handleClick = index => {
+    $pageNumber = index
+    isOpen = false
+  }
 </script>
 
 <nav class:isOpen>
-  <h1>Logo</h1>
+  <h1 on:click={() => handleClick(0)} on:keypress>Logo</h1>
   <ul>
-    {#each pages as page}
-      <li on:click on:keypress>{page}</li>
+    {#each pages as page, i}
+      <li class:active={i === $pageNumber} on:click={() => handleClick(i)} on:keypress>
+        {page}
+      </li>
     {/each}
   </ul>
 </nav>
@@ -32,6 +40,9 @@
   }
   li:hover {
     color: #f27121;
+  }
+  li.active {
+    color: var(--light);
   }
   @media screen and (max-width: 600px) {
     nav {

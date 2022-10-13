@@ -44,6 +44,7 @@
 
 <style>
   main {
+    max-width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
     gap: 3rem;
