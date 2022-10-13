@@ -55,8 +55,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
     gap: 3rem;
-    padding-block: 1rem;
-    padding-inline: 0;
+    padding: 1rem 0;
     background-color: unset;
     border: none;
     box-shadow: none;
