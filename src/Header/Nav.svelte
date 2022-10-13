@@ -1,15 +1,13 @@
 <script>
-  import { pages, pageNumber } from './pages'
-
-  export let isOpen = false
+  import { pages, pageNumber, isOpen } from './pages'
 
   export const handleClick = index => {
     $pageNumber = index
-    isOpen = false
+    $isOpen = false
   }
 </script>
 
-<nav class:isOpen>
+<nav class:isOpen={$isOpen}>
   <h1 on:click={() => handleClick(0)} on:keypress>Logo</h1>
   <ul>
     {#each pages as page, i}

@@ -1,15 +1,8 @@
 <script>
-  export let isOpen
+  import { isOpen } from './pages'
 </script>
 
-<svelte:head>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-  />
-</svelte:head>
-
-{#if isOpen}
+{#if $isOpen}
   <i class="fa-solid fa-2x fa-x" on:click on:keypress />
 {:else}
   <i class="fa fa-2x fa-bars" on:click on:keypress />

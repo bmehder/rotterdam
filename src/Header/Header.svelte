@@ -1,25 +1,26 @@
 <script>
+  import { isOpen } from './pages'
+
   import Nav from './Nav.svelte'
   import Hamburger from './Hamburger.svelte'
 
   const BREAKPOINT = 600
 
   let innerWidth
-  let isOpen = false
 
-  const closeNav = () => (isOpen = false)
-  const toggleNav = () => (isOpen = !isOpen)
+  const closeNav = () => ($isOpen = false)
+  const toggleNav = () => ($isOpen = !$isOpen)
 
   $: innerWidth > BREAKPOINT && closeNav()
-  $: !isOpen && scrollTo(0, 0)
+  $: !$isOpen && scrollTo(0, 0)
 </script>
 
 <svelte:window bind:innerWidth />
 
-<header class:isOpen>
+<header class:isOpen={$isOpen}>
   <div>
-    <Nav bind:isOpen on:click={closeNav} />
-    <Hamburger {isOpen} on:click={toggleNav} />
+    <Nav on:click={closeNav} />
+    <Hamburger on:click={toggleNav} />
   </div>
 </header>
 
