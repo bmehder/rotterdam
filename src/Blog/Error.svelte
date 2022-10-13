@@ -1,8 +1,8 @@
 <script>
-  import { error } from './store'
+  export let error
 </script>
 
-<p>{$error}</p>
+<p>{error}</p>
 
 <style>
   p {

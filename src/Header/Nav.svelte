@@ -1,15 +1,14 @@
 <script>
+  export let pages = []
   export let isOpen = false
 </script>
 
 <nav class:isOpen>
   <h1>Logo</h1>
-  <ul on:click on:keypress>
-    <li>Home</li>
-    <li>About</li>
-    <li>Blog</li>
-    <li>Services</li>
-    <li>Contact</li>
+  <ul>
+    {#each pages as page}
+      <li on:click on:keypress>{page}</li>
+    {/each}
   </ul>
 </nav>
 

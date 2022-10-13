@@ -1,7 +1,5 @@
 <script>
-  import { index } from './store'
-
-  export let isSingle = false
+  export let isSinglePost = false
   export let post
 
   const title = post.title.rendered
@@ -12,25 +10,27 @@
   const largeImage = mediaSizes.large?.source_url
   const fullImage = mediaSizes.full?.source_url
 
-  isSingle &&
+  isSinglePost &&
     scrollTo({
       top: 0,
       left: 0,
     })
 </script>
 
-<article class:single={isSingle}>
-  {#if isSingle}
+<article class:single={isSinglePost}>
+  {#if isSinglePost}
     <button on:click>&laquo; All Posts</button>
     <h2>{@html title}</h2>
     <div>{@html content}</div>
     <button on:click>&laquo; All Posts</button>
   {/if}
 
-  {#if !isSingle}
+  {#if !isSinglePost}
     <div class="outer">
       {#if mediumImage}
-        <img loading="lazy" src={mediumImage} alt={title} on:click on:keydown />
+        <img src={mediumImage} alt={title} on:click on:keydown />
+      {:else if largeImage}
+        <img loading="lazy" src={largeImage} alt={title} on:click on:keydown />
       {:else}
         <img loading="lazy" src={fullImage} alt={title} on:click on:keydown />
       {/if}

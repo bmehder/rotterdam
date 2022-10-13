@@ -1,46 +1,46 @@
 <script>
+  import { posts, index, error } from './store'
   import { tick } from 'svelte'
-  import { posts, index, error, lastScrollY } from './store'
 
   import Spinner from './Spinner.svelte'
   import Card from './Card.svelte'
   import Error from './Error.svelte'
 
-  const handleShowSingle = i => {
-    $lastScrollY = window.pageYOffset
-    $index = i
+  let lastScrollY
+
+  const showSinglePost = _index => {
+    lastScrollY = window.pageYOffset
+    $index = _index
   }
 
-  const handleShowAll = async () => {
+  const showAllPosts = async () => {
     $index = null
     await tick()
-    scrollTo({
-      top: $lastScrollY,
-      left: 0,
-    })
+    scrollTo({ top: lastScrollY })
   }
 
-  $: isShowSingle = $index != undefined
-  $: isShowAll = $index == undefined
+  $: isSinglePost = $index != undefined
+  $: isShowAll = !isSinglePost
+  $: post = $posts[$index]
 </script>
 
 <main>
-  {#if isShowSingle}
-    <Card post={$posts[$index]} isSingle={true} on:click={() => handleShowAll()} />
+  {#if isSinglePost}
+    <Card {isSinglePost} {post} on:click={() => showAllPosts()} />
   {/if}
 
   {#if isShowAll}
-    {#each $posts as post, i}
-      <Card {post} on:click={() => handleShowSingle(i)} />
+    {#each $posts as post, index}
+      <Card {post} on:click={() => showSinglePost(index)} />
     {:else}
       <Spinner />
     {/each}
   {/if}
-</main>
 
-{#if $error}
-  <Error --color="white" />
-{/if}
+  {#if $error}
+    <Error error={$error} --color="white" />
+  {/if}
+</main>
 
 <style>
   main {

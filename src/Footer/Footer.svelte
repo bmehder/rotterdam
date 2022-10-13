@@ -3,7 +3,7 @@
 
   const date = new Date().getFullYear()
 
-  const handleBackToTop = () => {
+  const handleClick = () => {
     scrollTo({
       top: 0,
       left: 0,
@@ -16,7 +16,7 @@
   <div>
     <p>Copyright © {date} Tom Foolery. All rights reserved.</p>
 
-    <BackToTop --color="rgba(255, 255, 255, 0.8)" on:click={handleBackToTop} />
+    <BackToTop --color="var(--white)" on:click={handleClick} />
   </div>
 </footer>
 

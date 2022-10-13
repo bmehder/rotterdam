@@ -2,21 +2,25 @@
   import Nav from './Nav.svelte'
   import Hamburger from './Hamburger.svelte'
 
+  const pages = ['Home', 'About', 'Blog', 'Services', 'Contact']
+  const BREAKPOINT = 600
+
   let innerWidth
   let isOpen = false
 
-  const toggleIsOpen = () => (isOpen = !isOpen)
+  const closeNav = () => (isOpen = false)
+  const toggleNav = () => (isOpen = !isOpen)
 
+  $: innerWidth > BREAKPOINT && closeNav()
   $: !isOpen && scrollTo(0, 0)
-  $: innerWidth > 600 && (isOpen = false)
 </script>
 
 <svelte:window bind:innerWidth />
 
 <header class:isOpen>
   <div>
-    <Nav {isOpen} on:click={() => (isOpen = false)} />
-    <Hamburger {isOpen} on:click={toggleIsOpen} />
+    <Nav {pages} {isOpen} on:click={closeNav} />
+    <Hamburger {isOpen} on:click={toggleNav} />
   </div>
 </header>
 
