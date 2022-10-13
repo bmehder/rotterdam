@@ -29,5 +29,6 @@
     width: 100%;
     max-width: 1100px;
     margin-inline: auto;
+    padding-inline: 1rem;
   }
 </style>
