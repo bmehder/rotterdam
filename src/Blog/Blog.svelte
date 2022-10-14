@@ -23,7 +23,7 @@
   const showAllPosts = async () => {
     $index = null
     await tick()
-    scrollTo({ top: lastScrollY })
+    setTimeout(() => scrollTo({ top: lastScrollY }), 100)
   }
 
   $: isSinglePost = $index != undefined
