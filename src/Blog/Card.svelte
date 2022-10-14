@@ -56,6 +56,7 @@
 <style>
   article {
     max-width: 720px;
+    height: 100%;
     margin: 0 auto;
     padding: 2rem;
     background-color: rgba(255, 255, 255, 0.8);

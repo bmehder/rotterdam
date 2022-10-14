@@ -10,9 +10,10 @@
 
   const closeNav = () => ($isOpen = false)
   const toggleNav = () => ($isOpen = !$isOpen)
+  const scrollToTop = () => scrollTo(0, 0)
 
   $: innerWidth > BREAKPOINT && closeNav()
-  $: !$isOpen && scrollTo(0, 0)
+  $: !$isOpen && scrollToTop()
 </script>
 
 <svelte:window bind:innerWidth />

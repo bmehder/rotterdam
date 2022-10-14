@@ -38,7 +38,9 @@
 
   {#if isShowAll}
     {#each $posts as post, index}
-      <Card {post} on:click={() => showSinglePost(index)} />
+      <div>
+        <Card {post} on:click={() => showSinglePost(index)} />
+      </div>
     {:else}
       <Spinner />
     {/each}
