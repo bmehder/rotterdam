@@ -1,7 +1,8 @@
 <script>
-  import { pages, pageNumber, isOpen } from './pages'
+  import { pages, pageNumber, isOpen, lastPageNumber } from './pages'
 
   export const handleClick = index => {
+    $lastPageNumber = $pageNumber
     $pageNumber = index
     $isOpen = false
   }

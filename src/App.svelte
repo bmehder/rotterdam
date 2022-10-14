@@ -1,6 +1,6 @@
 <script>
   import { fly } from 'svelte/transition'
-  import { pages, pageNumber } from './Header/pages'
+  import { pages, pageNumber, lastPageNumber } from './Header/pages'
 
   import Header from './Header/Header.svelte'
   import Home from './Home.svelte'
@@ -9,10 +9,18 @@
   import Services from './Services.svelte'
   import Contact from './Contact.svelte'
   import Footer from './Footer/Footer.svelte'
+  import { index } from './Blog/store'
 
   const pageComponents = [Home, About, Blog, Services, Contact]
-  const transitionInLeft = { delay: 600, duration: 400, x: 1500 }
-  const transitionOutLeft = { duration: 400, x: -1500 }
+
+  const transitionInLeft = { delay: 600, duration: 400, x: -1500 }
+  const transitionInRight = { delay: 600, duration: 400, x: 1500 }
+  const transitionOutRight = { duration: 400, x: -1500 }
+  const transitionOutLeft = { duration: 400, x: 1500 }
+
+  $: isSwipeLeft = $pageNumber - $lastPageNumber > 0
+
+  $: console.log(`${$pageNumber} - ${$lastPageNumber} = ${$pageNumber - $lastPageNumber}`)
 </script>
 
 <Header --background="var(--black)" --color="var(--white)" --width="1100px" />
@@ -21,7 +29,10 @@
   <div class="container">
     {#each pages as page, i}
       {#if pages[$pageNumber] === page}
-        <div in:fly={transitionInLeft} out:fly={transitionOutLeft}>
+        <div
+          in:fly={isSwipeLeft ? transitionInRight : transitionInLeft}
+          out:fly={isSwipeLeft ? transitionOutLeft : transitionOutRight}
+        >
           <svelte:component this={pageComponents[i]} />
         </div>
       {/if}

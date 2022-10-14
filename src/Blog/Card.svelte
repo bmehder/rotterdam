@@ -11,10 +11,11 @@
   const mediumImage = mediaSizes.midrange_square?.source_url
   const largeImage = mediaSizes.large?.source_url
   const fullImage = mediaSizes.full?.source_url
-  const transitionInRight = { delay: 600, duration: 400, x: -1500 }
-  const transitionInLeft = { delay: 600, duration: 400, x: 1500 }
-  const transitionOutLeft = { duration: 400, x: -1500 }
-  const transitionOutRight = { duration: 400, x: 1500 }
+
+  const transitionInLeft = { delay: 600, duration: 400, x: -1500 }
+  const transitionInRight = { delay: 600, duration: 400, x: 1500 }
+  const transitionOutRight = { duration: 400, x: -1500 }
+  const transitionOutLeft = { duration: 400, x: 1500 }
 
   isSinglePost &&
     scrollTo({
@@ -25,8 +26,8 @@
 
 <article
   class:single={isSinglePost}
-  in:fly={isSinglePost ? transitionInLeft : transitionInRight}
-  out:fly={isSinglePost ? transitionOutRight : transitionOutLeft}
+  in:fly={isSinglePost ? transitionInRight : transitionInLeft}
+  out:fly={isSinglePost ? transitionOutLeft : transitionOutRight}
 >
   {#if isSinglePost}
     <button on:click>&laquo; All Posts</button>
