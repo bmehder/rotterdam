@@ -1,5 +1,5 @@
 <script>
-  import { pages, pageNumber, isOpen, lastPageNumber } from './pages'
+  import { pages, pageNumber, isOpen, lastPageNumber } from './store'
 
   export const handleClick = index => {
     $lastPageNumber = $pageNumber
@@ -11,8 +11,12 @@
 <nav class:isOpen={$isOpen}>
   <h1 on:click={() => handleClick(0)} on:keypress>Logo</h1>
   <ul>
-    {#each pages as page, i}
-      <li class:active={i === $pageNumber} on:click={() => handleClick(i)} on:keypress>
+    {#each pages as page, index}
+      <li
+        class:active={index === $pageNumber}
+        on:click={() => handleClick(index)}
+        on:keypress
+      >
         {page}
       </li>
     {/each}

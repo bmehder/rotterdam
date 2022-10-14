@@ -1,5 +1,5 @@
 <script>
-  import { isOpen } from './pages'
+  import { isOpen } from './store'
 
   import Nav from './Nav.svelte'
   import Hamburger from './Hamburger.svelte'

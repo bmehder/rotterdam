@@ -1,5 +1,5 @@
 <script>
-  import { isOpen } from './pages'
+  import { isOpen } from './store'
 </script>
 
 {#if $isOpen}

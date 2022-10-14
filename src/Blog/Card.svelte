@@ -1,5 +1,6 @@
 <script>
   import { fly } from 'svelte/transition'
+  import { transitions } from '../Header/store'
 
   export let isSinglePost = false
   export let post
@@ -12,22 +13,22 @@
   const largeImage = mediaSizes.large?.source_url
   const fullImage = mediaSizes.full?.source_url
 
-  const transitionInLeft = { delay: 600, duration: 400, x: -1500 }
-  const transitionInRight = { delay: 600, duration: 400, x: 1500 }
-  const transitionOutRight = { duration: 400, x: -1500 }
-  const transitionOutLeft = { duration: 400, x: 1500 }
+  const { inLeft, inRight, outLeft, outRight } = Object.fromEntries(transitions)
 
-  isSinglePost &&
-    scrollTo({
-      top: 0,
-      left: 0,
-    })
+  const scrollToTop = () => {
+    isSinglePost &&
+      scrollTo({
+        top: 0,
+        left: 0,
+      })
+  }
 </script>
 
 <article
+  use:scrollToTop
   class:single={isSinglePost}
-  in:fly={isSinglePost ? transitionInRight : transitionInLeft}
-  out:fly={isSinglePost ? transitionOutLeft : transitionOutRight}
+  in:fly={isSinglePost ? inRight : inLeft}
+  out:fly={isSinglePost ? outLeft : outRight}
 >
   {#if isSinglePost}
     <button on:click>&laquo; All Posts</button>
