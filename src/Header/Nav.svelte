@@ -1,7 +1,7 @@
 <script>
   import { pages, pageNumber, isOpen, lastPageNumber } from './store'
 
-  export const handleClick = index => {
+  const handleClick = index => {
     $lastPageNumber = $pageNumber
     $pageNumber = index
     $isOpen = false

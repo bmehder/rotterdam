@@ -9,12 +9,9 @@
 {/if}
 
 <style>
-  i {
-    display: none;
-  }
-  @media screen and (max-width: 600px) {
+  @media screen and (min-width: 600px) {
     i {
-      display: block;
+      display: none;
     }
   }
 </style>

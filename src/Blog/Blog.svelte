@@ -1,19 +1,12 @@
 <script>
-  import { URL, posts, index, error } from './store'
+  import { posts, index, error } from './store'
   import { tick } from 'svelte'
 
   import Spinner from './Spinner.svelte'
   import Card from './Card.svelte'
   import Error from './Error.svelte'
 
-  $posts.length === 0 &&
-    fetch(URL)
-      .then(res => res.json())
-      .then(data => (Array.isArray(data) && posts.set(data)) || error.set(data.message))
-      .catch(error => console.log(error.message))
-      .finally(() => console.log('Fetch complete'))
-
-  let lastScrollY
+  let post, lastScrollY
 
   const showSinglePost = _index => {
     lastScrollY = window.pageYOffset
@@ -26,14 +19,23 @@
     setTimeout(() => scrollTo({ top: lastScrollY }), 100)
   }
 
+  const handleKeydown = evt => {
+    if (evt.key === 'ArrowLeft' || evt.key === 'Escape') {
+      showAllPosts()
+    }
+  }
+
   $: isSinglePost = $index != undefined
-  $: isShowAll = !isSinglePost
+  $: isShowAll = $index == undefined
+
   $: post = $posts[$index]
 </script>
 
+<svelte:window on:keydown={handleKeydown} />
+
 <main>
   {#if isSinglePost}
-    <Card {isSinglePost} {post} on:click={() => showAllPosts()} />
+    <Card {isSinglePost} {post} on:click={showAllPosts} />
   {/if}
 
   {#if isShowAll}

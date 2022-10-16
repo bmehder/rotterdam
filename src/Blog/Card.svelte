@@ -1,6 +1,6 @@
 <script>
   import { fly } from 'svelte/transition'
-  import { transitions } from '../Header/store'
+  import { inLeft, inRight, outLeft, outRight } from '../Header/store'
 
   export let isSinglePost = false
   export let post
@@ -12,8 +12,6 @@
   const mediumImage = mediaSizes.midrange_square?.source_url
   const largeImage = mediaSizes.large?.source_url
   const fullImage = mediaSizes.full?.source_url
-
-  const { inLeft, inRight, outLeft, outRight } = Object.fromEntries(transitions)
 
   const scrollToTop = () => {
     isSinglePost &&

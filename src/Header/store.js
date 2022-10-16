@@ -14,10 +14,7 @@ export const pageComponents = new Map([
   ['Contact', Contact],
 ])
 
-export const pages = [...pageComponents].reduce(
-  (acc, [value]) => [...acc, value],
-  []
-)
+export const pages = [...pageComponents].reduce((acc, [key]) => [...acc, key], [])
 
 export const transitions = new Map([
   ['inLeft', { x: -1500, delay: 400 }],
@@ -36,5 +33,5 @@ export const lastPageNumber = writable(null)
 
 export const isSwipeLeft = derived(
   [pageNumber, lastPageNumber],
-  ([a, b]) => a - b > 0
+  ([pageNumber, lastPageNumber]) => pageNumber - lastPageNumber > 0
 )
