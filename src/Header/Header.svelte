@@ -1,5 +1,6 @@
 <script>
-  import { isOpen } from './store'
+  import { viewport } from '../actions'
+  import { isOpen, isShowBackToTop } from './store'
 
   import Nav from './Nav.svelte'
   import Hamburger from './Hamburger.svelte'
@@ -18,7 +19,12 @@
 
 <svelte:window bind:innerWidth />
 
-<header class:isOpen={$isOpen}>
+<header
+  class:isOpen={$isOpen}
+  use:viewport={{ rootMargin: '100%' }}
+  on:enterViewport={() => ($isShowBackToTop = false)}
+  on:exitViewport={() => ($isShowBackToTop = true)}
+>
   <div>
     <Nav on:click={closeNav} />
     <Hamburger on:click={toggleNav} />
@@ -35,6 +41,7 @@
     position: fixed;
     width: 100%;
     min-height: 100vh;
+    z-index: 1;
   }
   div {
     display: flex;

@@ -11,8 +11,15 @@
     intervalId,
     last = 0
 
-  const startAutoPlay = () =>
-    (intervalId = setInterval(() => handleClick(), DURATION))
+  const startAutoPlay = () => {
+    intervalId = setInterval(() => handleClick(), DURATION)
+
+    return {
+      destroy() {
+        stopAutoPlay()
+      },
+    }
+  }
 
   const stopAutoPlay = () => clearInterval(intervalId)
 
@@ -103,7 +110,7 @@
     left: 50%;
     margin: 0;
     color: var(--dark);
-    font-size: 3rem;
+    font-size: 10vw;
     text-align: center;
     transform: translate(-50%, -50%);
   }

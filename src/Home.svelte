@@ -1,8 +1,9 @@
 <h1>Rotterdam Theme</h1>
+<h2>A single page app (SPA) built with Svelte components.</h2>
 <main>
   <div>
     <img src="img/plant.png" alt="" />
-    <h2>Plant 1</h2>
+    <h3>Plant 1</h3>
     <p>
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor
       sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur
@@ -12,7 +13,7 @@
 
   <div>
     <img src="img/plant2.png" alt="" />
-    <h2>Plant 2</h2>
+    <h3>Plant 2</h3>
     <p>
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor
       sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur
@@ -22,7 +23,7 @@
 
   <div>
     <img src="img/plant3.png" alt="" />
-    <h2>Plant 3</h2>
+    <h3>Plant 3</h3>
     <p>
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor
       sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur
@@ -35,11 +36,18 @@
   h1 {
     margin-top: 3rem;
     text-align: center;
+  }
+  h1 {
     color: var(--white);
+  }
+  h2 {
+    color: unset;
+    text-align: center;
   }
   main {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    max-width: none;
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
     gap: 3rem;
     margin-top: 0;
     margin-bottom: 2rem;
@@ -61,16 +69,11 @@
     opacity: 0.9;
     aspect-ratio: 4/3;
   }
-  h2 {
+  h3 {
     margin: 2rem 2rem 1rem;
     color: var(--white);
   }
   p {
     margin: 0rem 2rem 2rem;
-  }
-  @media screen and (max-width: 900px) {
-    main {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

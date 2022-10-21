@@ -27,6 +27,8 @@ export const { inLeft, inRight, outLeft, outRight } = Object.fromEntries(transit
 
 export const isOpen = writable(false)
 
+export const isShowBackToTop = writable(false)
+
 export const pageNumber = writable(0)
 
 export const lastPageNumber = writable(null)

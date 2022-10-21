@@ -1,22 +1,14 @@
 <script>
-  import BackToTop from './BackToTop.svelte'
+  import BackToTop from '../BackToTop.svelte'
 
   const date = new Date().getFullYear()
-
-  const handleClick = () => {
-    scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    })
-  }
 </script>
 
 <footer>
   <div>
     <p>Copyright © {date} Tom Foolery. All rights reserved.</p>
 
-    <BackToTop --color="var(--white)" on:click={handleClick} />
+    <BackToTop --color="var(--white)" />
   </div>
 </footer>
 
@@ -32,7 +24,7 @@
     padding-block: 2rem;
     max-width: var(--width, 100%);
     margin-inline: auto;
-    padding-inline: 3rem;
+    padding-inline: 1rem;
   }
   @media screen and (max-width: 600px) {
     div {
