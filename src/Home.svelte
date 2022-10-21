@@ -1,40 +1,76 @@
+<h1>Rotterdam Theme</h1>
 <main>
-  <h1>Home</h1>
+  <div>
+    <img src="img/plant.png" alt="" />
+    <h2>Plant 1</h2>
+    <p>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor
+      sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur
+      adipisicing elit.
+    </p>
+  </div>
 
-  <p>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic perferendis, odit expedita
-    sapiente mollitia velit ut! Consequatur, modi corrupti eum impedit temporibus, repellat quas
-    neque magnam cupiditate accusantium quam illum explicabo quasi non dignissimos id et nam. Minus
-    repudiandae adipisci et veniam cumque maiores quibusdam excepturi ea recusandae ipsam sapiente
-    eum, qui animi unde natus, explicabo odio voluptatem iure illo iste totam aspernatur, eveniet
-    veritatis necessitatibus. Blanditiis quibusdam quisquam, voluptatum culpa odit debitis nobis rem
-    natus cumque perferendis assumenda reprehenderit, velit vitae inventore illo quia. Ea eos quasi
-    error maxime voluptates, nesciunt vitae ipsa facilis suscipit, quas accusamus? Beatae, sed.
-  </p>
+  <div>
+    <img src="img/plant2.png" alt="" />
+    <h2>Plant 2</h2>
+    <p>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor
+      sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur
+      adipisicing elit.
+    </p>
+  </div>
 
-  <h2>Heading</h2>
-  <p>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic perferendis, odit expedita
-    sapiente mollitia velit ut! Consequatur, modi corrupti eum impedit temporibus, repellat quas
-    neque magnam cupiditate accusantium quam illum explicabo quasi non dignissimos id et nam. Minus
-    repudiandae adipisci et veniam cumque maiores quibusdam excepturi ea recusandae ipsam sapiente
-    eum, qui animi unde natus, explicabo odio voluptatem iure illo iste totam aspernatur, eveniet
-    veritatis necessitatibus. Blanditiis quibusdam quisquam, voluptatum culpa odit debitis nobis rem
-    natus cumque perferendis assumenda reprehenderit, velit vitae inventore illo quia. Ea eos quasi
-    error maxime voluptates, nesciunt vitae ipsa facilis suscipit, quas accusamus? Beatae, sed.
-  </p>
-
-  <p>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic perferendis, odit expedita
-    sapiente mollitia velit ut! Consequatur, modi corrupti eum impedit temporibus, repellat quas
-    neque magnam cupiditate accusantium quam illum explicabo quasi non dignissimos id et nam. Minus
-    repudiandae adipisci et veniam cumque maiores quibusdam excepturi ea recusandae ipsam sapiente
-    eum, qui animi unde natus, explicabo odio voluptatem iure illo iste totam aspernatur, eveniet
-    veritatis necessitatibus. Blanditiis quibusdam quisquam, voluptatum culpa odit debitis nobis rem
-    natus cumque perferendis assumenda reprehenderit, velit vitae inventore illo quia. Ea eos quasi
-    error maxime voluptates, nesciunt vitae ipsa facilis suscipit, quas accusamus? Beatae, sed.
-  </p>
+  <div>
+    <img src="img/plant3.png" alt="" />
+    <h2>Plant 3</h2>
+    <p>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum, dolor
+      sit amet consectetur adipisicing elit. Lorem ipsum, dolor sit amet consectetur
+      adipisicing elit.
+    </p>
+  </div>
 </main>
 
 <style>
+  h1 {
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--white);
+  }
+  main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+  div {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  img {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    opacity: 0.9;
+    aspect-ratio: 4/3;
+  }
+  h2 {
+    margin: 2rem 2rem 1rem;
+    color: var(--white);
+  }
+  p {
+    margin: 0rem 2rem 2rem;
+  }
+  @media screen and (max-width: 900px) {
+    main {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

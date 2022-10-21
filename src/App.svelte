@@ -12,6 +12,7 @@
     outRight,
   } from './Header/store'
 
+  import Slider from './Slider/Slider.svelte'
   import Header from './Header/Header.svelte'
   import Footer from './Footer/Footer.svelte'
 </script>
@@ -19,6 +20,9 @@
 <Header --background="var(--black)" --color="var(--white)" --width="1100px" />
 
 {#key $pageNumber}
+  {#if $pageNumber === 0}
+    <Slider />
+  {/if}
   <div
     class="container"
     in:fly={$isSwipeLeft ? inRight : inLeft}
