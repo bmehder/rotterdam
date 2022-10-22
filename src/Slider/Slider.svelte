@@ -1,16 +1,16 @@
 <script>
-  import { images } from './data'
+  import { slides } from './data'
 
   import LeftArrow from './LeftArrow.svelte'
   import PausePlay from './PausePlay.svelte'
   import RightArrow from './RightArrow.svelte'
 
   export let duration = 8000
-  export let autoplay = true
 
   let container
   let innerWidth
   let intervalId
+  let autoplay = true
   let last = 0
 
   const startAutoPlay = autoplay => {
@@ -45,7 +45,7 @@
   const handleClick = direction => {
     const scrollLeft = { left: last - innerWidth, behavior: 'smooth' }
     const scrollRight = { left: innerWidth + last, behavior: 'smooth' }
-    const containerWidth = innerWidth * images.length
+    const containerWidth = innerWidth * slides.length
     const isBack = direction === 'Back'
 
     container.scrollTo(isBack ? scrollLeft : scrollRight)
@@ -64,7 +64,7 @@
     evt.key === 'ArrowRight' && handleClick('Forward')
   }
 
-  $: last === innerWidth * images.length && reset()
+  $: last === innerWidth * slides.length && reset()
 </script>
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
@@ -72,7 +72,7 @@
 <aside use:startAutoPlay={autoplay} on:focus>
   <PausePlay on:click={() => (autoplay = !autoplay)} bind:autoplay />
   <div bind:this={container}>
-    {#each images as { src, text }}
+    {#each slides as { src, text }}
       <article>
         <img {src} alt />
         <h2>
