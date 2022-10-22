@@ -2,19 +2,31 @@
   import { images } from './data'
 
   import LeftArrow from './LeftArrow.svelte'
+  import PausePlay from './PausePlay.svelte'
   import RightArrow from './RightArrow.svelte'
 
-  const DURATION = 8000
+  export let duration = 8000
+  export let autoplay = true
 
   let container
   let innerWidth
   let intervalId
   let last = 0
 
-  const startAutoPlay = () => {
-    intervalId = setInterval(() => handleClick(), DURATION)
-
+  const startAutoPlay = autoplay => {
+    if (autoplay) {
+      intervalId = setInterval(() => handleClick(), duration)
+    } else {
+      stopAutoPlay()
+    }
     return {
+      update(changedAutoPlay) {
+        if (changedAutoPlay) {
+          intervalId = setInterval(() => handleClick(), duration)
+        } else {
+          stopAutoPlay()
+        }
+      },
       destroy() {
         stopAutoPlay()
       },
@@ -63,12 +75,8 @@
 
 <!-- on:mouseover={handleMouseover}
   on:mouseleave={handleMouseleave} -->
-<aside
-  use:startAutoPlay
-  on:mouseover={handleMouseover}
-  on:mouseleave={handleMouseleave}
-  on:focus
->
+<aside use:startAutoPlay={autoplay} on:focus>
+  <PausePlay on:click={() => (autoplay = !autoplay)} bind:autoplay />
   <div bind:this={container}>
     {#each images as { src, text }}
       <article>
@@ -93,7 +101,7 @@
   div {
     position: relative;
     width: 100%;
-    height: 60vh;
+    height: var(--height, 70vh);
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
@@ -145,7 +153,7 @@
       background-position: -200% center;
     }
   }
-  @media screen and (max-width: 769px) {
+  @media screen and (max-width: 768px) {
     div {
       height: 100vh;
     }
