@@ -39,7 +39,7 @@
     stopAutoPlay()
     container.scrollTo({ left: 0, behavior: 'smooth' })
     last = 0
-    startAutoPlay()
+    startAutoPlay(autoplay)
   }
 
   const handleClick = direction => {
@@ -69,6 +69,8 @@
   const handleMouseleave = () => startAutoPlay()
 
   $: last === innerWidth * images.length && reset()
+
+  $: console.log(autoplay)
 </script>
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
