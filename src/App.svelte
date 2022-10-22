@@ -1,5 +1,6 @@
 <script>
   import { fly } from 'svelte/transition'
+  import { slides } from '../public/data.js'
 
   import {
     pages,
@@ -25,7 +26,7 @@
     out:fly={$isSwipeLeft ? outRight : outLeft}
   >
     {#if $pageNumber === 0}
-      <Slider duration="6000" --height="70vh" />
+      <Slider {slides} duration="6000" --height="70vh" />
     {/if}
     <div class="container">
       <svelte:component this={pageComponents.get(pages[$pageNumber])} />

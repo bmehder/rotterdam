@@ -1,10 +1,11 @@
 <script>
-  import { slides } from './data'
+  // import { slides } from '../../public/data'
 
   import LeftArrow from './LeftArrow.svelte'
   import PausePlay from './PausePlay.svelte'
   import RightArrow from './RightArrow.svelte'
 
+  export let slides = []
   export let duration = 8000
 
   let container
@@ -72,10 +73,10 @@
 <aside use:startAutoPlay={autoplay} on:focus>
   <PausePlay on:click={() => (autoplay = !autoplay)} bind:autoplay />
   <div bind:this={container}>
-    {#each slides as { src, text }}
+    {#each slides as { src, text, options: { top, left } }}
       <article>
         <img {src} alt />
-        <h2>
+        <h2 style="top: {top}; left: {left}; ">
           <span>{text}</span>
         </h2>
       </article>
@@ -110,8 +111,8 @@
   }
   h2 {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    /* top: 50%;
+    left: 50%; */
     margin: 0;
     color: var(--dark);
     font-size: 10vw;
