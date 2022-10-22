@@ -20,16 +20,17 @@
 <Header --background="var(--black)" --color="var(--white)" --width="1100px" />
 
 {#key $pageNumber}
-  {#if $pageNumber === 0}
-    <Slider />
-  {/if}
-  <div
-    class="container"
+  <section
     in:fly={$isSwipeLeft ? inRight : inLeft}
     out:fly={$isSwipeLeft ? outRight : outLeft}
   >
-    <svelte:component this={pageComponents.get(pages[$pageNumber])} />
-  </div>
+    {#if $pageNumber === 0}
+      <Slider />
+    {/if}
+    <div class="container">
+      <svelte:component this={pageComponents.get(pages[$pageNumber])} />
+    </div>
+  </section>
 {/key}
 
 <Footer --background="var(--black)" --color="var(--white)" --width="1100px" />

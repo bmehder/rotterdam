@@ -17,7 +17,7 @@ export const clickOutside = (element, callbackFunction) => {
 // Viewport
 let intersectionObserver
 
-const ensureIntersectionObserver = params => {
+const ensureIntersectionObserver = options => {
   if (intersectionObserver) return
 
   intersectionObserver = new IntersectionObserver(entries => {
@@ -25,17 +25,17 @@ const ensureIntersectionObserver = params => {
       const eventName = entry.isIntersecting ? 'enterViewport' : 'exitViewport'
       entry.target.dispatchEvent(new CustomEvent(eventName))
     })
-  }, params)
+  }, options)
 }
 
-export const viewport = (element, params) => {
-  ensureIntersectionObserver(params)
+export const viewport = (element, options) => {
+  ensureIntersectionObserver(options)
 
   intersectionObserver.observe(element)
 
   return {
-    update(newParams) {
-      params = newParams
+    update(newOptions) {
+      options = newOptions
     },
 
     destroy() {

@@ -4,12 +4,12 @@
   import LeftArrow from './LeftArrow.svelte'
   import RightArrow from './RightArrow.svelte'
 
-  const DURATION = 5000
+  const DURATION = 8000
 
-  let container,
-    innerWidth,
-    intervalId,
-    last = 0
+  let container
+  let innerWidth
+  let intervalId
+  let last = 0
 
   const startAutoPlay = () => {
     intervalId = setInterval(() => handleClick(), DURATION)
@@ -57,20 +57,25 @@
   const handleMouseleave = () => startAutoPlay()
 
   $: last === innerWidth * images.length && reset()
-
-  // 	$: console.log(last)
 </script>
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
 
 <!-- on:mouseover={handleMouseover}
   on:mouseleave={handleMouseleave} -->
-<aside use:startAutoPlay on:focus>
+<aside
+  use:startAutoPlay
+  on:mouseover={handleMouseover}
+  on:mouseleave={handleMouseleave}
+  on:focus
+>
   <div bind:this={container}>
     {#each images as { src, text }}
       <article>
         <img {src} alt />
-        <h2>{text}</h2>
+        <h2>
+          <span>{text}</span>
+        </h2>
       </article>
     {/each}
   </div>
@@ -88,7 +93,7 @@
   div {
     position: relative;
     width: 100%;
-    height: 90vh;
+    height: 60vh;
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
@@ -113,5 +118,36 @@
     font-size: 10vw;
     text-align: center;
     transform: translate(-50%, -50%);
+  }
+  span {
+    /* --purple: rgb(123, 31, 162);
+    --violet: rgb(103, 58, 183);
+    --pink: rgb(244, 143, 177); */
+    background: linear-gradient(
+      to right,
+      var(--dark),
+      var(--medium),
+      var(--light),
+      var(--dark)
+    );
+    background-size: 200%;
+    white-space: nowrap;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: background-pan 8s linear infinite;
+  }
+  @keyframes background-pan {
+    from {
+      background-position: 0% center;
+    }
+    to {
+      background-position: -200% center;
+    }
+  }
+  @media screen and (max-width: 769px) {
+    div {
+      height: 100vh;
+    }
   }
 </style>
