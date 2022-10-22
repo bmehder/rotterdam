@@ -1,32 +1,27 @@
 <script>
-  // import { slides } from '../../public/data'
-
   import LeftArrow from './LeftArrow.svelte'
   import PausePlay from './PausePlay.svelte'
   import RightArrow from './RightArrow.svelte'
 
   export let slides = []
-  export let duration = 8000
+  export let duration = 6000
 
   let container
   let innerWidth
-  let intervalId
+  let intervalId = null
   let autoplay = true
   let last = 0
 
-  const startAutoPlay = autoplay => {
-    if (autoplay) {
-      intervalId = setInterval(() => handleClick(), duration)
-    } else {
-      stopAutoPlay()
-    }
+  const stopAutoPlay = () => clearInterval(intervalId)
+
+  const startAutoPlay = (node, autoplay) => {
+    const play = () => (intervalId = setInterval(() => moveSlides(), duration))
+
+    autoplay ? play() : stopAutoPlay()
+
     return {
       update(changedAutoPlay) {
-        if (changedAutoPlay) {
-          intervalId = setInterval(() => handleClick(), duration)
-        } else {
-          stopAutoPlay()
-        }
+        changedAutoPlay ? play() : stopAutoPlay()
       },
       destroy() {
         stopAutoPlay()
@@ -34,38 +29,38 @@
     }
   }
 
-  const stopAutoPlay = () => clearInterval(intervalId)
-
   const reset = () => {
-    stopAutoPlay()
     container.scrollTo({ left: 0, behavior: 'smooth' })
     last = 0
-    startAutoPlay(autoplay)
   }
 
-  const handleClick = direction => {
-    const scrollLeft = { left: last - innerWidth, behavior: 'smooth' }
-    const scrollRight = { left: innerWidth + last, behavior: 'smooth' }
+  const moveSlides = direction => {
+    const scrollLeftOptions = { left: -innerWidth, behavior: 'smooth' }
+    const scrollRightOptions = { left: innerWidth, behavior: 'smooth' }
     const containerWidth = innerWidth * slides.length
     const isBack = direction === 'Back'
+    const scrollToOptions = isBack ? scrollLeftOptions : scrollRightOptions
 
-    container.scrollTo(isBack ? scrollLeft : scrollRight)
+    const setLastXPosition = () => {
+      last = isBack
+        ? container.scrollLeft - innerWidth
+        : container.scrollLeft + innerWidth
 
-    last = isBack
-      ? container.scrollLeft - innerWidth
-      : container.scrollLeft + innerWidth
+      last < 0 && (last = 0)
 
-    last < 0 && (last = 0)
+      last > containerWidth && (last = containerWidth)
 
-    last > containerWidth && (last = containerWidth)
+      last === innerWidth * slides.length && reset()
+    }
+
+    container.scrollBy(scrollToOptions)
+    setLastXPosition()
   }
 
   const handleKeydown = evt => {
-    evt.key === 'ArrowLeft' && handleClick('Back')
-    evt.key === 'ArrowRight' && handleClick('Forward')
+    evt.key === 'ArrowLeft' && moveSlides('Back')
+    evt.key === 'ArrowRight' && moveSlides('Forward')
   }
-
-  $: last === innerWidth * slides.length && reset()
 </script>
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
@@ -76,14 +71,14 @@
     {#each slides as { src, text, options: { top, left } }}
       <article>
         <img {src} alt />
-        <h2 style="top: {top}; left: {left}; ">
+        <h2 style="top: {top}; left: {left};">
           <span>{text}</span>
         </h2>
       </article>
     {/each}
   </div>
-  <LeftArrow on:click={() => handleClick('Back')} />
-  <RightArrow on:click={() => handleClick('Forward')} />
+  <LeftArrow on:click={() => moveSlides('Back')} />
+  <RightArrow on:click={() => moveSlides('Forward')} />
 </aside>
 
 <style>
