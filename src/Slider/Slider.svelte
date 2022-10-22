@@ -64,19 +64,11 @@
     evt.key === 'ArrowRight' && handleClick('Forward')
   }
 
-  const handleMouseover = () => stopAutoPlay()
-
-  const handleMouseleave = () => startAutoPlay()
-
   $: last === innerWidth * images.length && reset()
-
-  $: console.log(autoplay)
 </script>
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
 
-<!-- on:mouseover={handleMouseover}
-  on:mouseleave={handleMouseleave} -->
 <aside use:startAutoPlay={autoplay} on:focus>
   <PausePlay on:click={() => (autoplay = !autoplay)} bind:autoplay />
   <div bind:this={container}>
@@ -94,9 +86,6 @@
 </aside>
 
 <style>
-  :global(body) {
-    padding: 0;
-  }
   aside {
     position: relative;
   }
@@ -130,9 +119,6 @@
     transform: translate(-50%, -50%);
   }
   span {
-    /* --purple: rgb(123, 31, 162);
-    --violet: rgb(103, 58, 183);
-    --pink: rgb(244, 143, 177); */
     background: linear-gradient(
       to right,
       var(--dark),

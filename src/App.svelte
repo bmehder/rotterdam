@@ -25,7 +25,7 @@
     out:fly={$isSwipeLeft ? outRight : outLeft}
   >
     {#if $pageNumber === 0}
-      <Slider duration="3000" --height="70vh" />
+      <Slider duration="6000" --height="70vh" />
     {/if}
     <div class="container">
       <svelte:component this={pageComponents.get(pages[$pageNumber])} />

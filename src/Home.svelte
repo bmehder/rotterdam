@@ -36,9 +36,8 @@
   h1 {
     margin-top: 3rem;
     text-align: center;
-  }
-  h1 {
     color: var(--white);
+    font-size: 3rem;
   }
   h2 {
     color: unset;
