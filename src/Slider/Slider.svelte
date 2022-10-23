@@ -65,7 +65,8 @@
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
 
 <aside use:startAutoPlay={isAutoplay}>
-  <PausePlay on:click={toggleAutoplay} bind:isAutoplay />
+  <PausePlay on:click={toggleAutoplay} {isAutoplay} />
+
   <div bind:this={container}>
     {#each slides as { src, text, options: { top, left } }}
       <article>
@@ -76,6 +77,7 @@
       </article>
     {/each}
   </div>
+
   <LeftArrow on:click={() => moveSlides('Back')} />
   <RightArrow on:click={() => moveSlides('Forward')} />
 </aside>
