@@ -10,7 +10,7 @@
   let innerWidth
   let intervalId = null
   let isAutoplay = true
-  let last = 0
+  let xPosition = 0
 
   const stopAutoPlay = () => clearInterval(intervalId)
 
@@ -33,7 +33,7 @@
 
   const reset = () => {
     container.scrollTo({ left: 0, behavior: 'smooth' })
-    last = 0
+    xPosition = 0
   }
 
   const moveSlides = direction => {
@@ -42,31 +42,31 @@
     const isBack = direction === 'Back'
     const scrollToOptions = isBack ? scrollLeftOptions : scrollRightOptions
 
-    const setLastXPosition = () => {
-      last = isBack
+    const isEnd = () => xPosition === innerWidth * slides.length
+
+    const setXPosition = () => {
+      xPosition = isBack
         ? container.scrollLeft - innerWidth
         : container.scrollLeft + innerWidth
 
-      last === innerWidth * slides.length && reset()
+      isEnd() && reset()
     }
 
     container.scrollBy(scrollToOptions)
-    setLastXPosition()
+    setXPosition()
   }
 
   const handleKeydown = evt => {
     evt.key === 'ArrowLeft' && moveSlides('Back')
     evt.key === 'ArrowRight' && moveSlides('Forward')
   }
-
-  const handleScroll = evt => (last = evt.target.offsetWidth)
 </script>
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
 
 <aside use:startAutoPlay={isAutoplay}>
   <PausePlay on:click={toggleAutoplay} bind:isAutoplay />
-  <div bind:this={container} on:scroll={handleScroll}>
+  <div bind:this={container}>
     {#each slides as { src, text, options: { top, left } }}
       <article>
         <img {src} alt />
