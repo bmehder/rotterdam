@@ -57,7 +57,7 @@
     evt.key === 'ArrowRight' && moveSlides('Forward')
   }
 
-  const handleScroll = async evt => (last = evt.target.offsetWidth)
+  const handleScroll = evt => (last = evt.target.offsetWidth)
 </script>
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
