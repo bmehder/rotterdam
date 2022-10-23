@@ -37,17 +37,15 @@
   }
 
   const moveSlides = direction => {
+    const isBack = direction === 'Back'
     const scrollLeftOptions = { left: -innerWidth, behavior: 'smooth' }
     const scrollRightOptions = { left: innerWidth, behavior: 'smooth' }
-    const isBack = direction === 'Back'
     const scrollToOptions = isBack ? scrollLeftOptions : scrollRightOptions
 
     const isEnd = () => xPosition === innerWidth * slides.length
 
     const setXPosition = () => {
-      xPosition = isBack
-        ? container.scrollLeft - innerWidth
-        : container.scrollLeft + innerWidth
+      xPosition = container.scrollLeft + innerWidth
 
       isEnd() && reset()
     }
@@ -60,6 +58,8 @@
     evt.key === 'ArrowLeft' && moveSlides('Back')
     evt.key === 'ArrowRight' && moveSlides('Forward')
   }
+
+  $: console.log(xPosition)
 </script>
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
