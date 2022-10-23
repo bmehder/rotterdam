@@ -37,7 +37,6 @@
   const moveSlides = direction => {
     const scrollLeftOptions = { left: -innerWidth, behavior: 'smooth' }
     const scrollRightOptions = { left: innerWidth, behavior: 'smooth' }
-    const containerWidth = innerWidth * slides.length
     const isBack = direction === 'Back'
     const scrollToOptions = isBack ? scrollLeftOptions : scrollRightOptions
 
@@ -45,10 +44,6 @@
       last = isBack
         ? container.scrollLeft - innerWidth
         : container.scrollLeft + innerWidth
-
-      last < 0 && (last = 0)
-
-      last > containerWidth && (last = containerWidth)
 
       last === innerWidth * slides.length && reset()
     }
@@ -61,13 +56,15 @@
     evt.key === 'ArrowLeft' && moveSlides('Back')
     evt.key === 'ArrowRight' && moveSlides('Forward')
   }
+
+  const handleScroll = async evt => (last = evt.target.offsetWidth)
 </script>
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
 
 <aside use:startAutoPlay={autoplay} on:focus>
   <PausePlay on:click={() => (autoplay = !autoplay)} bind:autoplay />
-  <div bind:this={container}>
+  <div bind:this={container} on:scroll={handleScroll}>
     {#each slides as { src, text, options: { top, left } }}
       <article>
         <img {src} alt />
