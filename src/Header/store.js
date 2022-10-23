@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, derived } from 'svelte/store'
 
 import Home from '../Home.svelte'
 import About from '../About.svelte'
@@ -32,3 +32,8 @@ export const isShowBackToTop = writable(false)
 export const pageNumber = writable(0)
 
 export const lastPageNumber = writable(null)
+
+export const isSwipeLeft = derived(
+  [pageNumber, lastPageNumber],
+  ([pageNumber, lastPageNumber]) => pageNumber - lastPageNumber > 0
+)
