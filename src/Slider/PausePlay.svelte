@@ -1,11 +1,11 @@
 <script>
-  export let autoplay
+  export let isAutoplay
 </script>
 
 <svg
   on:click
   on:keypress
-  class:autoplay
+  class:isAutoplay
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 24 24"
   fill="currentColor"
@@ -26,7 +26,7 @@
     cursor: pointer;
     color: var(--light);
   }
-  .autoplay {
+  .isAutoplay {
     color: var(--dark);
   }
 </style>

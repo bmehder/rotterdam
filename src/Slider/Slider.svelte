@@ -9,19 +9,21 @@
   let container
   let innerWidth
   let intervalId = null
-  let autoplay = true
+  let isAutoplay = true
   let last = 0
 
   const stopAutoPlay = () => clearInterval(intervalId)
 
-  const startAutoPlay = (node, autoplay) => {
-    const play = () => (intervalId = setInterval(() => moveSlides(), duration))
+  const toggleAutoplay = () => (isAutoplay = !isAutoplay)
 
-    autoplay ? play() : stopAutoPlay()
+  const startAutoPlay = (node, isAutoplay) => {
+    const play = () => (intervalId = setInterval(moveSlides, duration))
+
+    isAutoplay ? play() : stopAutoPlay()
 
     return {
-      update(changedAutoPlay) {
-        changedAutoPlay ? play() : stopAutoPlay()
+      update(isNewAutoplay) {
+        isNewAutoplay ? play() : stopAutoPlay()
       },
       destroy() {
         stopAutoPlay()
@@ -62,8 +64,8 @@
 
 <svelte:window bind:innerWidth on:keydown={handleKeydown} />
 
-<aside use:startAutoPlay={autoplay} on:focus>
-  <PausePlay on:click={() => (autoplay = !autoplay)} bind:autoplay />
+<aside use:startAutoPlay={isAutoplay}>
+  <PausePlay on:click={toggleAutoplay} bind:isAutoplay />
   <div bind:this={container} on:scroll={handleScroll}>
     {#each slides as { src, text, options: { top, left } }}
       <article>
